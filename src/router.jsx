@@ -41,8 +41,8 @@ const router = createBrowserRouter([
                         element: <HostVanDetail />,
                         children: [
                             { element: <HostVanInfo />, index: true },
-                            { path: "photos", element: <HostVanPhotos /> },
                             { path: "pricing", element: <HostVanPricing /> },
+                            { path: "photos", element: <HostVanPhotos /> },
                         ],
                     },
                 ],

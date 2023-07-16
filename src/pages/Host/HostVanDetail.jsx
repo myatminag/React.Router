@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link, Outlet } from "react-router-dom";
+import { useParams, Link, Outlet, NavLink } from "react-router-dom";
 
 const HostVanDetail = () => {
     const { id } = useParams();
@@ -10,6 +10,12 @@ const HostVanDetail = () => {
             .then((res) => res.json())
             .then((data) => setCurrVan(data.vans));
     }, []);
+
+    const activeStyle = {
+        fontWeight: "bold",
+        textDecoration: "underline",
+        color: "#161616",
+    };
 
     if (!currVan) {
         return <h1>Loading...</h1>;
@@ -32,7 +38,36 @@ const HostVanDetail = () => {
                         <h4>${currVan.price}/day</h4>
                     </div>
                 </div>
-                <Outlet />
+
+                <nav className="host-van-detail-nav">
+                    <NavLink
+                        to="."
+                        end
+                        style={({ isActive }) =>
+                            isActive ? activeStyle : null
+                        }
+                    >
+                        Details
+                    </NavLink>
+                    <NavLink
+                        to="pricing"
+                        style={({ isActive }) =>
+                            isActive ? activeStyle : null
+                        }
+                    >
+                        Pricing
+                    </NavLink>
+                    <NavLink
+                        to="photos"
+                        style={({ isActive }) =>
+                            isActive ? activeStyle : null
+                        }
+                    >
+                        Photos
+                    </NavLink>
+                </nav>
+
+                <Outlet context={{ currVan }} />
             </div>
         </section>
     );
