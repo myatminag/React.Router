@@ -1,19 +1,31 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { getVans } from "../../api";
 
 const Vans = () => {
     const [vans, setVans] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
     const [searchParams, setSearchParams] = useSearchParams();
     const typeFilter = searchParams.get("type");
 
     useEffect(() => {
-        fetch("/api/vans")
-            .then((res) => res.json())
-            .then((data) => setVans(data.vans));
+        const loadVans = async () => {
+            setLoading(true);
+            try {
+                const data = await getVans();
+                setVans(data);
+            } catch (err) {
+                setError(err);
+            }
+            setLoading(false);
+        };
+        loadVans();
     }, []);
 
     const displayedVans = typeFilter
-        ? vans.filter((van) => van.type === typeFilter)
+        ? vans?.filter((van) => van.type === typeFilter)
         : vans;
 
     const handleFilterChange = (key, value) => {
@@ -26,6 +38,14 @@ const Vans = () => {
             return prevSearchParams;
         });
     };
+
+    if (loading) {
+        return <h1>Loading...</h1>;
+    }
+
+    if (error) {
+        return <h1>Something went wrong!</h1>;
+    }
 
     return (
         <div className="van-list-container">
@@ -68,7 +88,7 @@ const Vans = () => {
             </div>
 
             <div className="van-list">
-                {displayedVans.map((van) => (
+                {displayedVans?.map((van) => (
                     <div key={van.id} className="van-tile">
                         <Link
                             to={van.id}

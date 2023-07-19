@@ -2,11 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Vans from "./pages/Vans";
+import Vans from "./pages/Vans/Vans";
 import Dashboard from "./pages/Host/Dashboard";
 import Income from "./pages/Host/Income";
 import Reviews from "./pages/Host/Reviews";
-import VanDetail from "./pages/VanDetail";
+import VanDetail from "./pages/Vans/VanDetail";
 import HostVans from "./pages/Host/HostVans";
 import HostVanDetail from "./pages/Host/HostVanDetail";
 import AppLayout from "./components/AppLayout";
@@ -14,6 +14,7 @@ import HostLayout from "./components/HostLayout";
 import HostVanInfo from "./pages/Host/HostVanInfo";
 import HostVanPhotos from "./pages/Host/HostVanPhotos";
 import HostVanPricing from "./pages/Host/HostVanPricing";
+import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
                     },
                 ],
             },
+            { path: "*", element: <NotFound /> },
         ],
     },
 ]);
