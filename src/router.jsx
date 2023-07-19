@@ -15,10 +15,12 @@ import HostVanInfo from "./pages/Host/HostVanInfo";
 import HostVanPhotos from "./pages/Host/HostVanPhotos";
 import HostVanPricing from "./pages/Host/HostVanPricing";
 import NotFound from "./pages/NotFound";
+import Error from "./components/Error";
 
 const router = createBrowserRouter([
     {
         element: <AppLayout />,
+        errorElement: <Error />,
         children: [
             { path: "/", element: <Home /> },
             { path: "/about", element: <About /> },
