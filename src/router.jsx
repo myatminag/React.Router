@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Vans from "./pages/Vans/Vans";
+import { Vans, loader as VansLoader } from "./pages/Vans/Vans";
 import Dashboard from "./pages/Host/Dashboard";
 import Income from "./pages/Host/Income";
 import Reviews from "./pages/Host/Reviews";
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             {
                 path: "/vans",
                 children: [
-                    { element: <Vans />, index: true },
+                    { element: <Vans />, index: true, loader: VansLoader },
                     { path: ":id", element: <VanDetail /> },
                 ],
             },
