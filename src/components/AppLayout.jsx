@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom";
 
+import UserIcon from "../assets/user-icon.svg";
+
 const AppLayout = () => {
     const activeStyle = {
         fontWeight: "bold",
@@ -39,6 +41,9 @@ const AppLayout = () => {
                     >
                         Vans
                     </NavLink>
+                    <Link to="login" className="login-link">
+                        <img src={UserIcon} className="login-icon" />
+                    </Link>
                 </nav>
             </header>
             <Outlet />

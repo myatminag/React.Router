@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
-import { useParams, Link, Outlet, NavLink } from "react-router-dom";
+import { useLoaderData, Link, Outlet, NavLink } from "react-router-dom";
+import { getHostVans } from "../../api";
 
-const HostVanDetail = () => {
-    const { id } = useParams();
-    const [currVan, setCurrVan] = useState(null);
+export const loader = ({ params }) => {
+    return getHostVans(params.id);
+};
 
-    useEffect(() => {
-        fetch(`/api/host/vans/${id}`)
-            .then((res) => res.json())
-            .then((data) => setCurrVan(data.vans));
-    }, []);
+export const HostVanDetail = () => {
+    const currVan = useLoaderData();
 
     const activeStyle = {
         fontWeight: "bold",
@@ -72,5 +69,3 @@ const HostVanDetail = () => {
         </section>
     );
 };
-
-export default HostVanDetail;
