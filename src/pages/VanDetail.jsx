@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 
 const VanDetail = () => {
     const { id } = useParams();
+    const location = useLocation();
+    console.log(location);
 
     const [van, setVan] = useState(null);
 
@@ -12,10 +14,13 @@ const VanDetail = () => {
             .then((data) => setVan(data.vans));
     }, [id]);
 
+    const search = location.state?.search || "";
+    const type = location.state?.type || "all";
+
     return (
         <div className="van-detail-container">
-            <Link to=".." relative="path" className="back-button">
-                &larr; <span>Back to all vans</span>
+            <Link to={`..${search}`} relative="path" className="back-button">
+                &larr; <span>Back to {type} vans</span>
             </Link>
 
             {van ? (
