@@ -20,7 +20,7 @@ import HostVanPricing from "./pages/Host/HostVanPricing";
 import NotFound from "./pages/NotFound";
 import Error from "./components/Error";
 import Login from "./pages/Login";
-import requiredAuth from "./components/RequiredAuth";
+import RequiredAuth from "./components/RequiredAuth";
 
 const router = createBrowserRouter([
     {
@@ -44,11 +44,11 @@ const router = createBrowserRouter([
             {
                 path: "/host",
                 element: <HostLayout />,
+
                 children: [
                     {
                         element: <Dashboard />,
                         index: true,
-                        loader: () => requiredAuth(),
                     },
                     { path: "income", element: <Income /> },
                     { path: "reviews", element: <Reviews /> },

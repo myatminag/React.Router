@@ -1,11 +1,13 @@
-import { redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-const requiredAuth = () => {
+const RequiredAuth = ({ children }) => {
     const isLoggedIn = false;
 
     if (!isLoggedIn) {
-        throw redirect("/login");
+        <Navigate to="/login" replace />;
     }
+
+    return children;
 };
 
-export default requiredAuth;
+export default RequiredAuth;
